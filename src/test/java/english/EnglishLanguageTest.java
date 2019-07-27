@@ -2,8 +2,8 @@ package english;
 
 import base.BaseTest;
 import configurations.RequestConfigurations;
-import configurations.ResponseConfigurations;
 import dataproviders.DataProvidersForEnglishLanguage;
+import dto.YandexSpellerDto;
 import enums.SpellerLanguages;
 import org.testng.annotations.Test;
 import steps.AssertionSteps;
@@ -16,11 +16,10 @@ public class EnglishLanguageTest extends BaseTest {
     }
 
 
-
     @Test(dataProviderClass = DataProvidersForEnglishLanguage.class, dataProvider = "data for one word check")
-    public void oneWordCheck (SpellerLanguages language, String textToCheck, String expectedText) {
+    public void oneWordCheck(SpellerLanguages language, String textToCheck, String expectedText) {
 
-        YANDEX_REQUEST = RequestConfigurations
+        YANDEX_RESPONSE = RequestConfigurations
                 .makeRequest()
                 .putLanguage(language)
                 .putOptions(DEFAULT)
@@ -28,11 +27,13 @@ public class EnglishLanguageTest extends BaseTest {
                 .allIsSet()
                 .sendRequest();
 
-        new AssertionSteps().wordAssertion(expectedText);
+        new AssertionSteps().jsonIsNotNull(YANDEX_RESPONSE)
+                .wordAssertion(expectedText);
 
     }
+
     @Test(dataProviderClass = DataProvidersForEnglishLanguage.class, dataProvider = "incorrect data")
-    public void workingWithIncorrectData (SpellerLanguages language, String checkingText, String expectedText) {
+    public void workingWithIncorrectData(SpellerLanguages language, String checkingText, String expectedText) {
 
     }
 }

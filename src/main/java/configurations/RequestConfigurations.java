@@ -15,6 +15,7 @@ import java.util.Map;
 
 public class RequestConfigurations {
 
+    @Getter
     private static Map<String, String> requestData = new HashMap<>();
 
     public static RequestSpecification requestSpecification() {

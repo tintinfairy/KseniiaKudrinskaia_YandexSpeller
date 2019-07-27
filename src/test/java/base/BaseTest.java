@@ -14,7 +14,7 @@ import java.io.IOException;
 public class BaseTest {
 
     protected String FILE_PATH = "src/test/resources/test.properties";
-    protected Response YANDEX_REQUEST;
+    protected Response YANDEX_RESPONSE;
     protected PropertiesFile propertiesFile;
 
 

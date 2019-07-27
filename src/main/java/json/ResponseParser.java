@@ -7,9 +7,9 @@ import io.restassured.response.Response;
 public class ResponseParser {
     private YandexSpellerDto newResponse;
 
-    public ResponseParser getResponceFromJson(Response response) {
+    public YandexSpellerDto getResponceFromJson(Response response) {
         newResponse = new Gson().fromJson(response.asString(), YandexSpellerDto.class);
-        return this;
+        return newResponse;
     }
 
 }
