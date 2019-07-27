@@ -1,7 +1,10 @@
 package base;
 
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import properties.PropertiesFile;
@@ -20,7 +23,8 @@ public class BaseTest {
         propertiesFile = new PropertiesFile();
         propertiesFile.createPropertiesFile(FILE_PATH);
         propertiesFile.getValuesFromPropertiesFile();
-        RestAssured.baseURI = propertiesFile.getCheckTextEndpoint();
+
+
     }
 
     @AfterMethod

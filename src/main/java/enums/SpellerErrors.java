@@ -6,10 +6,10 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum  SpellerErrors {
-    ERROR_UNKNOWN_WORD(1),
-    ERROR_REPEAT_WORD(2),
-    ERROR_CAPITALIZATION(3),
-    ERROR_TOO_MANY_ERRORS(4);
+    ERROR_UNKNOWN_WORD("1"),
+    ERROR_REPEAT_WORD("2"),
+    ERROR_CAPITALIZATION("3"),
+    ERROR_TOO_MANY_ERRORS("4");
 
-    private int errorCode;
+    private String errorCode;
 }
