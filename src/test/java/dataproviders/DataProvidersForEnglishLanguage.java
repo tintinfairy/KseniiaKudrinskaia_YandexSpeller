@@ -2,6 +2,10 @@ package dataproviders;
 
 import org.testng.annotations.DataProvider;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static enums.SpellerErrors.ERROR_UNKNOWN_WORD;
 import static enums.SpellerLanguages.EN;
 
 
@@ -9,21 +13,18 @@ public class DataProvidersForEnglishLanguage {
 
     @DataProvider(name = "data for sentence check")
     public Object[][] englishSentenceDataProvider() {
+        List<String> expectedWords = Arrays.asList("hello", "darkness", "my", "friend");
         return new Object[][]{
-                {EN, "hillo drkness mu olf frend", "hello"},
-                {EN, "hillo drkness mu olf frend", "darkness"},
-                {EN, "hillo drkness mu olf frend", "my"},
-                {EN, "hillo drkness mu olf frend", "old"},
-                {EN, "hillo drkness mu olf frend", "friend"}
+                {EN, "hillo drkness muy frend", expectedWords}
         };
     }
 
     @DataProvider(name = "data for one word check")
     public Object[][] englishOneWordDataProvider() {
         return new Object[][]{
-                {EN, "heu", "hey"},
-                {EN, "desr", "dear"},
-                {EN, "huw", "how"},
+                {EN, "towir", "tower"},
+                {EN, "guing", "going"},
+                {EN, "bigin", "begin"},
                 {EN, "uou", "you"},
                 {EN, "felllng", "feeling"}
 
@@ -31,12 +32,12 @@ public class DataProvidersForEnglishLanguage {
         };
     }
 
-    @DataProvider(name = "incorrect data")
-    public Object[][] englishFailCombinationsDataProvider() {
+    @DataProvider(name = "data for checking errors")
+    public Object[][] englishCombinationsWithErrorsDataProvider() {
         return new Object[][]{
-                {EN, "буря", "helli"},
-                {EN, "crowm", "hope"},
-                {EN, "небо", "thinc"}
+                {EN, "londun", ERROR_UNKNOWN_WORD},
+                {EN, "bookk", ERROR_UNKNOWN_WORD},
+                {EN, "crowm", ERROR_UNKNOWN_WORD}
 
         };
     }

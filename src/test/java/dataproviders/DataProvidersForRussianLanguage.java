@@ -2,6 +2,9 @@ package dataproviders;
 
 import org.testng.annotations.DataProvider;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static enums.SpellerLanguages.RU;
 
 
@@ -9,29 +12,28 @@ public class DataProvidersForRussianLanguage {
 
     @DataProvider(name = "data for sentence check")
     public Object[][] russianSentenceDataProvider() {
+        List<String> expectedWords = Arrays.asList("здесь", "мало", "места");
         return new Object[][]{
-                {RU, "здес малм мнста", "здесь"},
-                {RU, "здес малм мнста", "мало"},
-                {RU,"здес малм мнста", "места"}
+                {RU, "здес малло мнста", expectedWords}
         };
     }
 
-    @DataProvider(name = "data for one word check")
-    public Object[][] russianOneWordDataProvider() {
+    @DataProvider(name = "data with digits")
+    public Object[][] russianWordsWithDigitsDataProvider() {
         return new Object[][]{
-                {RU, "бурья", "буря"},
-                {RU, "нглою", "мглою"},
-                {RU,"нибо", "небо"},
-                {RU,"кройет", "кроет"}
+                {RU, "ког34да коалв сле546зла ", "коала"},
+                {RU, "вс3тал4о солндце", "солнце"},
+                {RU, "синхрофазатрон ст0ит", "синхрофазотрон"}
 
         };
     }
-    @DataProvider(name = "incorrect data")
-    public Object[][] russianFailCombinationsDataProvider() {
+
+    @DataProvider(name = "data with capitals")
+    public Object[][] russianWordsWithCapitalsDataProvider() {
         return new Object[][]{
-                {RU, "helli", "буря"},
-                {RU, "молю", "мглою"},
-                {RU,"thinc", "небо"}
+                {RU, "веДутСя дурожные рАБоты", "дорожные"},
+                {RU, "буДЬТе астарожны ЗдеСь ", "осторожны"},
+                {RU, "нЕ СаДись окрошено", "окрашено"}
 
         };
     }

@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RusssianLanguageTests">
+    <test name="RussianLanguageTest">
+        <classes>
+            <class name="russian.RussianLanguageTest"/>
+        </classes>
+    </test>
+
+</suite>

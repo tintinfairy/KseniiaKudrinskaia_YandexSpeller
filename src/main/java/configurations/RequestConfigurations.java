@@ -51,7 +51,7 @@ public class RequestConfigurations {
         public RequestConfigurations allIsSet() {
             RequestConfigurations requestConfigurations = new RequestConfigurations();
             requestConfigurations.requestData = optionsOfRequest;
-            return new RequestConfigurations();
+            return requestConfigurations;
         }
 
     }
