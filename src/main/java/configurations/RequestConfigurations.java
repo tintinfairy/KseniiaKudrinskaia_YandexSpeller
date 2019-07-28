@@ -5,28 +5,29 @@ import enums.SpellerOptions;
 import enums.SpellerRequestParameters;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class RequestConfigurations {
 
-    @Getter
-    private static Map<String, String> requestData = new HashMap<>();
+    private Map<String, String> requestData = new HashMap<>();
 
     public static RequestSpecification requestSpecification() {
         return new RequestSpecBuilder()
                 .setAccept(ContentType.JSON)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
                 .build();
     }
 
     public static class RequestBuilder {
 
-        @Getter
         private Map<String, String> optionsOfRequest = new HashMap<>();
 
         private RequestBuilder() {
@@ -48,7 +49,8 @@ public class RequestConfigurations {
         }
 
         public RequestConfigurations allIsSet() {
-            requestData = optionsOfRequest;
+            RequestConfigurations requestConfigurations = new RequestConfigurations();
+            requestConfigurations.requestData = optionsOfRequest;
             return new RequestConfigurations();
         }
 
