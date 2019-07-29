@@ -19,19 +19,24 @@ public class AssertionSteps {
     private List<YandexSpellerDto> yandexSpellerDtoList;
     private Response response;
 
-    public AssertionSteps jsonForOneWordIsNotNull(Response response) {
+    public AssertionSteps(Response response) {
+        this.response = response;
+    }
+
+    public AssertionSteps jsonForOneWordIsNotNull() {
         yandexSpellerDto = new ResponseParser()
                 .getResponseForOneWordFromJson(response);
-        this.response = response;// todo не надо тут сетать переменную - это вообщне не visible.
+
+        //[FIXED]
+        // todo не надо тут сетать переменную - это вообщне не visible.
         //сетать ее надо бы в кострукторе,а тут - использовать (это в таком варианте, который ты делаешь)
         assertThat(yandexSpellerDto).isNotNull();
         return this;
     }
 
-    public AssertionSteps jsonForTextIsNotNull(Response response) {
+    public AssertionSteps jsonForTextIsNotNull() {
         yandexSpellerDtoList = new ResponseParser()
                 .getResponseForTextFromJson(response);
-        this.response = response;
         assertThat(yandexSpellerDtoList).isNotNull();
         return this;
     }
@@ -41,26 +46,24 @@ public class AssertionSteps {
         return this;
     }
 
-    public AssertionSteps wordAssertion(String expectedWord) {
+    public void wordAssertion(String expectedWord) {
         assertThat(yandexSpellerDto.getS(), hasItem(expectedWord));
-        return this;
+
     }
 
-    public AssertionSteps textAssertion(List<String> expectedWords) {
+    public void textAssertion(List<String> expectedWords) {
         int i = 0;
         for (String word : expectedWords) {
             assertThat(yandexSpellerDtoList.get(i).getS(), hasItem(word));
             i++;
         }
 
-        return this;
-
     }
 
-    public AssertionSteps errorAssertion(SpellerErrors error) {
-
+    public void errorAssertion(SpellerErrors error) {
         assertThat(String.valueOf(yandexSpellerDto.getCode()), equalToIgnoringCase(error.getErrorCode()));
+
+        //[FIXED]
 //todo личшние строки везде поубирай
-        return this;
     }
 }

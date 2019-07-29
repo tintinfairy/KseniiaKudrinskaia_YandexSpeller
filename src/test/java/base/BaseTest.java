@@ -2,32 +2,33 @@ package base;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import properties.PropertiesFile;
 
 import java.io.IOException;
 
 public class BaseTest {
 
-    protected String FILE_PATH = "src/test/resources/test.properties";
+    private String FILE_PATH = "src/test/resources/test.properties";
     protected Response YANDEX_RESPONSE;
-    protected PropertiesFile propertiesFile;
+    private PropertiesFile propertiesFile;
 
 
-    @BeforeMethod
+    @BeforeSuite
     public void setup() throws IOException {
+        //[FIXED]
         //todo неверно логически перед каждым методом проперти вычитывать.
         //такое должно сетаться один раз в начале.
         // а лучше в PropertiesFile геттер на энв и использовать его в корневых классах вызова метода эндпоинта
         propertiesFile = new PropertiesFile();
         propertiesFile.createPropertiesFile(FILE_PATH);
-        propertiesFile.getValuesFromPropertiesFile();
+
         RestAssured.baseURI = propertiesFile.getCheckTextEndpoint();
 
     }
 
-    @AfterMethod
+    @AfterSuite
     public void teardown() {
     }
 
