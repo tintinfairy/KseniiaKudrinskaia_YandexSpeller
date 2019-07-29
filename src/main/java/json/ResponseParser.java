@@ -11,22 +11,21 @@ public class ResponseParser {
     //[FIXED]
     //todo а зечем тут эта переменная? я пока не вижу вообще ее необъодимости
 
-
-    public YandexSpellerDto getResponseForOneWordFromJson(Response response) {
-        return getResponseForTextFromJson(response).get(0);
-
-        //[FIXED]
+    //[FIXED]
 	/* todo	return ((List<YandexSpellerDto>)new Gson()
 				.fromJson(response.asString(), new TypeToken<List<YandexSpellerDto>>() {}.getType()))
 			.get(0);*/
 
-        //return newResponse.get(0);
-    }
-
-    public List<YandexSpellerDto> getResponseForTextFromJson(Response response) {
+    public YandexSpellerDto getResponseForOneWordFromJson(Response response) {
         return ((List<YandexSpellerDto>) new Gson()
                 .fromJson(response.asString(), new TypeToken<List<YandexSpellerDto>>() {
-                }.getType()));
+                }.getType())).get(0);
+    }
+
+    public List<YandexSpellerDto> getResponseForCheckTextsFromJson(Response response) {
+        return ((List<List<YandexSpellerDto>>) new Gson()
+                .fromJson(response.asString(), new TypeToken<List<List<YandexSpellerDto>>>() {
+                }.getType())).get(0);
     }
 
 

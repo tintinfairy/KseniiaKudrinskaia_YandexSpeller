@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum UriElements {
 
     HTTPS_SCHEME("https"),
-    PATH("/services/spellservice.json/checkText");
+    PATH_CHECK_TEXT("/services/spellservice.json/checkText"),
+    PATH_CHECK_TEXTS("/services/spellservice.json/checkTexts");
 
 
     private String element;

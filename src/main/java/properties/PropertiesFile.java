@@ -15,6 +15,8 @@ public class PropertiesFile {
     private String env;
     @Getter
     private String checkTextEndpoint;
+    @Getter
+    private String checkTextsEndpoint;
 
 
     public String getURI(String scheme, String path) {
@@ -29,7 +31,8 @@ public class PropertiesFile {
         properties = new Properties();
         properties.load(new FileInputStream(new File(filePath)));
         env = properties.getProperty("env");
-        checkTextEndpoint = getURI(UriElements.HTTPS_SCHEME.getElement(), UriElements.PATH.getElement());
+        checkTextEndpoint = getURI(UriElements.HTTPS_SCHEME.getElement(), UriElements.PATH_CHECK_TEXT.getElement());
+        checkTextsEndpoint = getURI(UriElements.HTTPS_SCHEME.getElement(), UriElements.PATH_CHECK_TEXTS.getElement());
     }
 
 }

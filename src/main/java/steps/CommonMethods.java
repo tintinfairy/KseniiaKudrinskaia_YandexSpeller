@@ -1,10 +1,9 @@
-package base;
+package steps;
 
 import configurations.RequestConfigurations;
 import enums.SpellerLanguages;
 import enums.SpellerOptions;
 import io.restassured.response.Response;
-import steps.AssertionSteps;
 
 public class CommonMethods {
 
@@ -18,15 +17,16 @@ public class CommonMethods {
                 .sendRequest();
     }
 
+
     public static AssertionSteps commonAssertionForOneWord(Response response) {
         return new AssertionSteps(response)
                 .jsonForOneWordIsNotNull()
                 .hasSuccessfulResponse();
     }
 
-    public static AssertionSteps commonAssertionForText(Response response) {
+    public static AssertionSteps commonAssertionForTexts(Response response) {
         return new AssertionSteps(response)
-                .jsonForTextIsNotNull()
+                .jsonForTextsIsNotNull()
                 .hasSuccessfulResponse();
     }
 }

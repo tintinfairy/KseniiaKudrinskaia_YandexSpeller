@@ -1,36 +1,31 @@
 package tests;
 
 import base.BaseTest;
-import base.CommonMethods;
 import dataproviders.DataProvidersForAllLanguages;
 import dataproviders.DataProvidersForHandlingSituations;
 import enums.SpellerErrors;
 import enums.SpellerLanguages;
 import enums.SpellerOptions;
+import io.restassured.RestAssured;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.util.List;
+import steps.CommonMethods;
 
 //[FIXED]
 //todo деление на eng и rus старнно и в java и d soapUI. никакой пользы нет - только дублирование кода
-public class AllLanguagesTest extends BaseTest {
+public class GetCheckTextTest extends BaseTest {
 
-    @Test(dataProviderClass = DataProvidersForAllLanguages.class, dataProvider = "sentenceDataProvider")
-    public void sentenceCheck(SpellerLanguages language, SpellerOptions option, String textToCheck, List<String> expectedWords) {
-
-        YANDEX_RESPONSE = CommonMethods.getResponse(language, option, textToCheck);
-
-        CommonMethods.commonAssertionForText(YANDEX_RESPONSE)
-                .textAssertion(expectedWords);
+    @BeforeClass
+    public void setUpURI() {
+        RestAssured.baseURI = properties().getCheckTextEndpoint();
     }
-
 
     @Test(dataProviderClass = DataProvidersForAllLanguages.class, dataProvider = "oneWordDataProvider")
     public void oneWordCheck(SpellerLanguages language, SpellerOptions option, String wordToCheck, String expectedWord) {
         YANDEX_RESPONSE = CommonMethods.getResponse(language, option, wordToCheck);
 
         CommonMethods.commonAssertionForOneWord(YANDEX_RESPONSE)
-                .wordAssertion(expectedWord);
+                .verifyCorrectWordIs(expectedWord);
 
     }
 
@@ -39,7 +34,7 @@ public class AllLanguagesTest extends BaseTest {
         YANDEX_RESPONSE = CommonMethods.getResponse(language, option, wordToCheck);
 
         CommonMethods.commonAssertionForOneWord(YANDEX_RESPONSE)
-                .errorAssertion(error);
+                .verifyErrorCodeIs(error);
     }
 
     @Test(dataProviderClass = DataProvidersForHandlingSituations.class, dataProvider = "wordsWithDigitsDataProvider")
@@ -47,7 +42,7 @@ public class AllLanguagesTest extends BaseTest {
         YANDEX_RESPONSE = CommonMethods.getResponse(language, option, textToCheck);
 
         CommonMethods.commonAssertionForOneWord(YANDEX_RESPONSE)
-                .wordAssertion(expectedText);
+                .verifyCorrectWordIs(expectedText);
 
     }
 
@@ -56,6 +51,6 @@ public class AllLanguagesTest extends BaseTest {
         YANDEX_RESPONSE = CommonMethods.getResponse(language, option, textToCheck);
 
         CommonMethods.commonAssertionForOneWord(YANDEX_RESPONSE)
-                .wordAssertion(expectedText);
+                .verifyCorrectWordIs(expectedText);
     }
 }

@@ -14,7 +14,8 @@ test {
     useTestNG(){
         useDefaultListeners = true
 
-        suites "src/test/resources/spellerTests.xml"
+        suites "src/test/resources/textTests.xml"
+        suites "src/test/resources/textsTests.xml"
     }
 }
 dependencies {

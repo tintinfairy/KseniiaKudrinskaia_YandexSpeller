@@ -34,9 +34,9 @@ public class AssertionSteps {
         return this;
     }
 
-    public AssertionSteps jsonForTextIsNotNull() {
+    public AssertionSteps jsonForTextsIsNotNull() {
         yandexSpellerDtoList = new ResponseParser()
-                .getResponseForTextFromJson(response);
+                .getResponseForCheckTextsFromJson(response);
         assertThat(yandexSpellerDtoList).isNotNull();
         return this;
     }
@@ -46,12 +46,12 @@ public class AssertionSteps {
         return this;
     }
 
-    public void wordAssertion(String expectedWord) {
+    public void verifyCorrectWordIs(String expectedWord) {
         assertThat(yandexSpellerDto.getS(), hasItem(expectedWord));
 
     }
 
-    public void textAssertion(List<String> expectedWords) {
+    public void verifyCorrectSentenceIs(List<String> expectedWords) {
         int i = 0;
         for (String word : expectedWords) {
             assertThat(yandexSpellerDtoList.get(i).getS(), hasItem(word));
@@ -60,10 +60,17 @@ public class AssertionSteps {
 
     }
 
-    public void errorAssertion(SpellerErrors error) {
+    public void verifyErrorCodeIs(SpellerErrors error) {
         assertThat(String.valueOf(yandexSpellerDto.getCode()), equalToIgnoringCase(error.getErrorCode()));
 
         //[FIXED]
 //todo личшние строки везде поубирай
+    }
+
+    public void verifyCorrectCodeForTextIs(SpellerErrors error) {
+        for (int i = 0; i < yandexSpellerDtoList.size(); i++) {
+            assertThat(String.valueOf(yandexSpellerDtoList.get(i).getCode()), equalToIgnoringCase(error.getErrorCode()));
+        }
+
     }
 }

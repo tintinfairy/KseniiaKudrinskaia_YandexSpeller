@@ -2,12 +2,8 @@ package dataproviders;
 
 import org.testng.annotations.DataProvider;
 
-import java.util.Arrays;
-import java.util.List;
-
 import static enums.SpellerErrors.ERROR_UNKNOWN_WORD;
 import static enums.SpellerLanguages.EN;
-import static enums.SpellerLanguages.RU;
 import static enums.SpellerOptions.DEFAULT;
 
 //[FIXED]
@@ -15,18 +11,8 @@ import static enums.SpellerOptions.DEFAULT;
 public class DataProvidersForAllLanguages {
 
     //[FIXED]
-    @DataProvider()//todo имя тут вообще опционально,
+    //todo имя тут вообще опционально,
     // можно прямо по названию метода к нему обращаться в @Test
-    public Object[][] sentenceDataProvider() {
-        List<String> rusExpectedWords = Arrays.asList("здесь", "мало", "места");
-        List<String> enExpectedWords = Arrays.asList("hello", "darkness", "my", "friend");
-        return new Object[][]{
-                {RU, DEFAULT, "здес малло мнста", rusExpectedWords},
-                {EN, DEFAULT, "hillo drkness muy frend", enExpectedWords}
-        };
-    }
-
-
     @DataProvider()
     public Object[][] oneWordDataProvider() {
         return new Object[][]{

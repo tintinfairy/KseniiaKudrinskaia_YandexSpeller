@@ -1,6 +1,5 @@
 package base;
 
-import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -24,8 +23,13 @@ public class BaseTest {
         propertiesFile = new PropertiesFile();
         propertiesFile.createPropertiesFile(FILE_PATH);
 
-        RestAssured.baseURI = propertiesFile.getCheckTextEndpoint();
+    }
 
+    protected PropertiesFile properties() {
+        if (propertiesFile == null) {
+            propertiesFile = new PropertiesFile();
+        }
+        return propertiesFile;
     }
 
     @AfterSuite
