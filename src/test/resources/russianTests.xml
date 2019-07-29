@@ -5,5 +5,5 @@
             <class name="russian.RussianLanguageTest"/>
         </classes>
     </test>
-
+<!--todo поубирай личние строчки. если где в проету еще есть - тоже-->
 </suite>

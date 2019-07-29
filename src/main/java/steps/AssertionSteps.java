@@ -22,7 +22,8 @@ public class AssertionSteps {
     public AssertionSteps jsonForOneWordIsNotNull(Response response) {
         yandexSpellerDto = new ResponseParser()
                 .getResponseForOneWordFromJson(response);
-        this.response = response;
+        this.response = response;// todo не надо тут сетать переменную - это вообщне не visible.
+        //сетать ее надо бы в кострукторе,а тут - использовать (это в таком варианте, который ты делаешь)
         assertThat(yandexSpellerDto).isNotNull();
         return this;
     }
@@ -59,7 +60,7 @@ public class AssertionSteps {
     public AssertionSteps errorAssertion(SpellerErrors error) {
 
         assertThat(String.valueOf(yandexSpellerDto.getCode()), equalToIgnoringCase(error.getErrorCode()));
-
+//todo личшние строки везде поубирай
         return this;
     }
 }

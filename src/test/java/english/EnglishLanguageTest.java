@@ -11,7 +11,7 @@ import steps.AssertionSteps;
 import java.util.List;
 
 import static enums.SpellerOptions.DEFAULT;
-
+//todo деление на eng и rus старнно и в java и d soapUI. никакой пользы нет - только дублирование кода
 public class EnglishLanguageTest extends BaseTest {
 
     @Test(dataProviderClass = DataProvidersForEnglishLanguage.class, dataProvider = "data for sentence check")
