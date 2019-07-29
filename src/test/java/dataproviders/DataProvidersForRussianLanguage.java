@@ -7,10 +7,11 @@ import java.util.List;
 
 import static enums.SpellerLanguages.RU;
 
-
+//todo аналогично с тестами - лучше объединить в идни методы
 public class DataProvidersForRussianLanguage {
 
-    @DataProvider(name = "data for sentence check")
+    @DataProvider(name = "data for sentence check")//todo имя тут вообще опционально,
+    // можно прямо по названию метода к нему обращаться в @Test
     public Object[][] russianSentenceDataProvider() {
         List<String> expectedWords = Arrays.asList("здесь", "мало", "места");
         return new Object[][]{

@@ -17,6 +17,9 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() throws IOException {
+        //todo неверно логически перед каждым методом проперти вычитывать.
+        //такое должно сетаться один раз в начале.
+        // а лучше в PropertiesFile геттер на энв и использовать его в корневых классах вызова метода эндпоинта
         propertiesFile = new PropertiesFile();
         propertiesFile.createPropertiesFile(FILE_PATH);
         propertiesFile.getValuesFromPropertiesFile();
