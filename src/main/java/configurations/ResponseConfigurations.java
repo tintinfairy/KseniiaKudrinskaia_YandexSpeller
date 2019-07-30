@@ -7,7 +7,7 @@ import org.apache.http.HttpStatus;
 
 public class ResponseConfigurations {
 
-    public static ResponseSpecification succesfulResponse() {
+    public static ResponseSpecification successfulResponse() {
         return new ResponseSpecBuilder()
                 .expectStatusCode(HttpStatus.SC_OK)
                 .expectContentType(ContentType.JSON)

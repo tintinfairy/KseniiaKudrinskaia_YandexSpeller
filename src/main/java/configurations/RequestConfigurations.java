@@ -10,17 +10,33 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import properties.PropertiesFile;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class RequestConfigurations {
+import static enums.UriElements.*;
+
+public class RequestConfigurations extends PropertiesFile {
 
     private Map<String, String> requestData = new HashMap<>();
 
-    public static RequestSpecification requestSpecification() {
+
+    public static RequestSpecification requestSpecificationToGetCheckText() {
+
         return new RequestSpecBuilder()
                 .setAccept(ContentType.JSON)
+                .setBaseUri(HTTPS_SCHEME.getElement() + getEnv() + PATH_CHECK_TEXT.getElement())
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .build();
+    }
+
+    public static RequestSpecification requestSpecificationToGetCheckTexts() {
+
+        return new RequestSpecBuilder()
+                .setAccept(ContentType.JSON)
+                .setBaseUri(HTTPS_SCHEME.getElement() + getEnv() + PATH_CHECK_TEXTS.getElement())
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
                 .build();
@@ -60,8 +76,14 @@ public class RequestConfigurations {
         return new RequestBuilder();
     }
 
-    public Response sendRequest() {
-        return RestAssured.given(requestSpecification())
+    public Response sendRequestToGetCheckText() {
+        return RestAssured.given(requestSpecificationToGetCheckText())
+                .queryParams(requestData)
+                .get();
+    }
+
+    public Response sendRequestToGetCheckTexts() {
+        return RestAssured.given(requestSpecificationToGetCheckTexts())
                 .queryParams(requestData)
                 .get();
     }

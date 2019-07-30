@@ -42,7 +42,7 @@ public class AssertionSteps {
     }
 
     public AssertionSteps hasSuccessfulResponse() {
-        response.then().specification(ResponseConfigurations.succesfulResponse());
+        response.then().specification(ResponseConfigurations.successfulResponse());
         return this;
     }
 
